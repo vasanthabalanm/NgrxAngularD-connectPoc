@@ -31,6 +31,9 @@ import { ApprovedRequestComponent } from './components/Admin/approved-request/ap
 import { AddbranchComponent } from './components/Admin/hotel-branch/models/addbranch/addbranch.component';
 import { HotelBranchStoreModule } from './components/Admin/hotel-branch/store/hotelbranch.module';
 import { PostHotelBranchStoreModule } from './components/Admin/hotel-branch/models/store/addbranch.module';
+import { GetPendingUserStoreModule } from './components/Admin/pending-request/store/getPendingUserData.module';
+import { DeleteApprovedStoreModule } from './components/Admin/approved-request/store/deleteApprovedUserStore.module';
+import { AddmenuComponent } from './components/Admin/menu/modal/addmenu/addmenu.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,7 @@ import { PostHotelBranchStoreModule } from './components/Admin/hotel-branch/mode
     PendingOrderComponent,
     ApprovedRequestComponent,
     AddbranchComponent,
+    AddmenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +70,9 @@ import { PostHotelBranchStoreModule } from './components/Admin/hotel-branch/mode
     TotalCountsStoreModule,
     HotelBranchStoreModule,
     PostHotelBranchStoreModule,
+    GetPendingUserStoreModule,
+    DeleteApprovedStoreModule,
+    
   
 
   ],

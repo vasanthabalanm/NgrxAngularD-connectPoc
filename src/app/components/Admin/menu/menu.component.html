@@ -1,1 +1,59 @@
-<p>menu works!</p>
+<div class="float-end px-4 py-2">
+    <button mat-button class="bg-primary text-white" (click)="openDialog('add')">
+      Add Menu
+    </button>
+</div>
+
+<div class="container" *ngIf="!loading">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="SI.No">
+          <th mat-header-cell *matHeaderCellDef> SI.No </th>
+          <td mat-cell *matCellDef="let element;let i=index"> {{i+1}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="ItemName">
+            <th mat-header-cell *matHeaderCellDef>Item Name</th>
+            <td mat-cell *matCellDef="let element">{{element.email}}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="ItemQuantity">
+            <th mat-header-cell *matHeaderCellDef>Item Quantity</th>
+            <td mat-cell *matCellDef="let element">{{element.userRole}}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="ItemFixedPrice">
+            <th mat-header-cell *matHeaderCellDef>Item FixedPrice</th>
+            <td mat-cell *matCellDef="let elemetn">{{elemetn.userPhone}}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="Edit">
+            <th mat-header-cell *matHeaderCellDef>Edit</th>
+            <td mat-cell *matCellDef="let list">
+                <button mat-icon-button class="text-primary" (click)="openDialog('edit',list)">
+                  <mat-icon class="edited-bin">edit</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="Delete">
+            <th mat-header-cell *matHeaderCellDef>Delete</th>
+            <td mat-cell *matCellDef="let list">
+                <button mat-icon-button class="text-danger" (click)="remove(list)">
+                    <mat-icon class="edited-bin">delete</mat-icon>
+                  </button>
+            </td>
+        </ng-container>
+    
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+
+
+<div *ngIf="loading">
+    <mat-spinner></mat-spinner>
+</div>
+  
+  

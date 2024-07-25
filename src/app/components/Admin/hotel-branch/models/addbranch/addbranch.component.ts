@@ -27,8 +27,9 @@ export class AddbranchComponent {
   addBranch!: FormGroup;
   userId!: number;
   subscription!: Subscription;
-  hotelIds!: number;
+  hotelBranchIds!: number;
   listofHotel: any[] = [];
+  editData!:any
 
   constructor(
     private fb: FormBuilder,
@@ -51,12 +52,14 @@ export class AddbranchComponent {
 
   onClose(): void {
     this.dialogRef.close();
+    console.log()
   }
 
   ngOnInit() {
     this.initializeUserId();
     this.getAllhotel();
     this.setFormValues(this.updateData)
+    console.log(this.updateData)
   }
 
   get hotelid() {
@@ -88,6 +91,7 @@ export class AddbranchComponent {
 
   // patch the values
   setFormValues(data: any) {
+    this.hotelBranchIds = data.id
     this.addBranch.patchValue({
       hotelId: data.hotelId,
       branchName: data.branchName,
@@ -99,7 +103,7 @@ export class AddbranchComponent {
   // save logic
   formBranchsubmit() {
     console.log(this.addBranch.value)
-    let branchdata = this.addBranch.value
+    let branchdata = {...this.addBranch.value,}
 
     if (this.addBranch.valid) {
       this.store.dispatch(PostNewBranch({ payload: branchdata }));
@@ -120,8 +124,8 @@ export class AddbranchComponent {
 
   // update logic
   updateBranch() {
-    console.log(this.addBranch.value)
-    let updateData = this.addBranch.value
+    let updateData = {...this.addBranch.value,id:this.hotelBranchIds}
+    console.log(updateData)
     if (this.addBranch.valid) {
       this.store.dispatch(UpdateBranchData({ payload: updateData }));
       this.subscription = this.store.select(UpdateHotelBranchSelector).subscribe({

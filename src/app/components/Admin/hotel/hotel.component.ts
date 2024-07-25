@@ -42,7 +42,7 @@ export class HotelComponent implements OnInit {
     this.initializeUserData();
   }
 
-  openDialog(action: string, item?: any): void {
+  openDialog(action: string, item?: any) {
     let dialogRef;
     if (action === 'edit') {
       dialogRef = this.dialog.open(AddhotelmodalComponent, {

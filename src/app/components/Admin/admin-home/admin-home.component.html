@@ -1,0 +1,81 @@
+<div class="container">
+    <h3 class="py-5">Hotel Management Data</h3>
+    <div class="d-flex justify-content-between">
+        <div><p>welcome:<strong>{{userEmail}}</strong></p></div>
+        <div><p>Role:<strong>{{userRole}}</strong></p></div>
+    </div>
+    
+    
+    <div class="container" >
+        <mat-tab-group animationDuration="0ms" *ngIf="userRole == 'User' || 'Admin'">
+            <!-- Hotel -->
+            <mat-tab >
+                <ng-template mat-tab-label>Admin
+                    <span class="mat-badge-content">6</span>
+                </ng-template>
+                <div class="py-5" *ngIf="userRole =='Admin'">
+                    <mat-tab-group animationDuration="0ms">
+                        <mat-tab>
+                            <ng-template mat-tab-label>Hotel
+                              <span class="mat-badge-content">{{totalHotelCounts}}</span>
+                            </ng-template>
+                            <app-hotel></app-hotel>
+                        </mat-tab>
+
+                        <mat-tab >
+                            <ng-template mat-tab-label>Branch
+                                <span class="mat-badge-content">{{totalBranchCounts}}</span>
+                            </ng-template>
+                            <app-hotel-branch/>
+                        </mat-tab>
+    
+                        <mat-tab label="Menu">
+                            <app-menu/>
+                        </mat-tab>
+
+                        <mat-tab>
+                            <ng-template mat-tab-label>Pending User
+                                <span class="mat-badge-content">{{totalPendingUserCounts}}</span>
+                            </ng-template>
+                            <app-pending-request/>
+                        </mat-tab>
+
+                        <mat-tab>
+                            <ng-template mat-tab-label>Approved User
+                                <span class="mat-badge-content">{{totalapprovedUserCounts}}</span>
+                            </ng-template>
+                            <app-approved-request/>
+                        </mat-tab>
+
+                        <mat-tab label="Pending Order">
+                            <app-pending-order/>
+                        </mat-tab>
+                        
+                    </mat-tab-group>
+                </div>
+                <div *ngIf="userRole =='User'">
+                    <div class="container content">
+                        <p class="text-center">User can't access this page!</p>
+                    </div>
+                </div>
+                
+            </mat-tab>
+
+            <!-- HotelBranch -->
+            <mat-tab label="User">
+                <div *ngIf="userRole =='User'">
+                    <router-outlet/>
+                </div>
+                
+                <div *ngIf="userRole =='Admin'">
+                    <div class="container content">
+                        <p class="text-center">Please Login as a <strong>User</strong> to Order!!</p>
+                    </div>
+                </div>
+            </mat-tab>
+
+        </mat-tab-group>
+    </div>
+    
+
+</div>

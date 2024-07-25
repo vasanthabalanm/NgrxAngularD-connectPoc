@@ -1,0 +1,59 @@
+<div class="float-end px-4 py-2">
+    <button mat-button class="bg-primary text-white" (click)="openDialog('add')">
+      Add Branch
+    </button>
+  </div>
+  
+  <div class="container py-5">
+    <div class="py-4">
+      <mat-table class="whole-table-content bg-white" [dataSource]="datasource" matSort>
+        <!-- Define columns -->
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef>SI NO</mat-header-cell>
+          <mat-cell *matCellDef="let list,let i =index">{{i+1}}</mat-cell>
+        </ng-container>
+  
+        <ng-container matColumnDef="branchName">
+          <mat-header-cell *matHeaderCellDef>Branch Name</mat-header-cell>
+          <mat-cell *matCellDef="let list">{{list.branchName}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="branchLocation">
+            <mat-header-cell *matHeaderCellDef>Branch Location</mat-header-cell>
+            <mat-cell *matCellDef="let list">{{list.branchLocation}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="branchPhoneNumber">
+            <mat-header-cell *matHeaderCellDef>Branch PhoneNumber</mat-header-cell>
+            <mat-cell *matCellDef="let list">{{list.branchPhoneNumber}}</mat-cell>
+        </ng-container>
+  
+        <ng-container matColumnDef="edit">
+          <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
+          <mat-cell *matCellDef="let list" class="text-center">
+            <button mat-icon-button class="text-primary" (click)="openDialog('edit',list)">
+              <mat-icon class="edited-bin">edit</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+  
+        <ng-container matColumnDef="delete">
+          <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+          <mat-cell *matCellDef="let list" class="text-center">
+            <button mat-icon-button class="text-danger" (click)="deleteBranch(list)">
+              <mat-icon class="edited-bin">delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+  
+        <!-- Table rows -->
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        
+      </mat-table>
+      <!-- Show message if no data -->
+      <div *ngIf="branchList && branchList.length === 0;">
+          <p>There is no data</p>
+      </div>
+    </div>
+  </div>

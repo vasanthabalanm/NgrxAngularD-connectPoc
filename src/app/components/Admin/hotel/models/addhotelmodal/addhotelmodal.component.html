@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="d-flex justify-content-between py-2 px-3">
+        <div>       
+            <h1 mat-dialog-title>Hotel</h1>
+        </div>
+
+        <div>
+            <button mat-icon-button (click)="onClose()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+
+    </div>
+    <h2 mat-dialog-title class="px-5">{{ updateData.title }}</h2>
+    <div mat-dialog-content class="px-5 py-2">
+        <form [formGroup]="Addhotel">
+            <mat-form-field class="input-box-size" appearance="outline">
+              <mat-label>Hotel</mat-label>
+              <input formControlName="hotelName" type="text" matInput placeholder="Enter Hotel Name" required>
+              <mat-error *ngIf="hotelname?.invalid && (hotelname?.touched || hotelname?.dirty)">
+                  <span *ngIf="hotelname?.hasError('required')">HotelName is required</span>
+                  <span *ngIf="hotelname?.hasError('pattern')">Enter valid Hotel Name</span>
+              </mat-error>
+            </mat-form-field>
+
+            <div class="d-flex float-end">
+                <div mat-dialog-actions>
+                    <button mat-button class="bg-secondary text-white" (click)="onClose()">Close</button>
+                </div>
+                <div class="py-2" *ngIf="!updateData.isedit">
+                    <button mat-button  class="bg-primary text-white" type="submit" (click)="formHotelsubmit()">Save</button>
+                </div>
+                <div class="py-2" *ngIf="updateData.isedit">
+                    <button mat-button  class="bg-primary text-white" (click)="updateHotel()">Update</button>
+                </div>
+            </div>
+            
+          </form>
+    </div>
+
+</div>

@@ -1,0 +1,68 @@
+<div class="container py-5 px-5">
+    <mat-card appearance="outlined" >
+        <mat-card-content>
+            <p class="text-center fw-bold pt-5">Welcome to register here!</p>
+            <div class=" d-flex justify-content-center ">
+                <form [formGroup]="registerDetail" (submit)="formsubmit()">
+                    <div class="pt-4">
+                        <mat-form-field class="input-box-size" appearance="outline">
+                        <mat-label>Name</mat-label>
+                        <input type="text" formControlName="userName" matInput placeholder="Enter Your Name" required (input)="nodigits($event)">
+                        <mat-error *ngIf="userName?.invalid && (userName?.touched || userName?.dirty)">
+                            <span *ngIf="userName?.hasError('required')">Username is required</span>
+                            <span *ngIf="userName?.hasError('maxlength')">Max len 30</span>
+                            <span *ngIf="userName?.hasError('nonamespace')">No Start and End space</span>
+                            <span *ngIf="userName?.hasError('pattern')">Only letters allowed</span>
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="input-box-size" appearance="outline">
+                            <mat-label>Email</mat-label>
+                            <input formControlName="email" type="email" matInput placeholder="Enter email address" required>
+                            <mat-error *ngIf="userEmail?.invalid && (userEmail?.touched || userEmail?.dirty)">
+                                <span *ngIf="userEmail?.hasError('required')">Email is required</span>
+                                <span *ngIf="userEmail?.hasError('pattern')">Enter a valid email address</span>
+                            </mat-error>
+                      </mat-form-field>
+                      
+                    </div>
+
+                    <div>
+                        <mat-form-field class="input-box-size" appearance="outline">
+                            <mat-label>Phone</mat-label>
+                            <input type="tel" formControlName="userPhone" matInput  required minlength="6" maxlength="14"placeholder="+(91)-XXXXXXXXXX" (input)="noalphabets($event)" />
+                            <mat-error *ngIf="userPhonenumber?.invalid && (userPhonenumber?.touched || userPhonenumber?.dirty)">
+                                <span *ngIf="userPhonenumber?.hasError('required')">Phone number is required</span>
+                                <span *ngIf="userPhonenumber?.hasError('pattern')">Enter 10 digit number with country code</span>
+                            </mat-error>
+                      </mat-form-field>
+                      
+                    </div>
+
+                    <div>
+                        <mat-form-field class="input-box-size" appearance="outline">
+                            <mat-label>Location</mat-label>
+                            <input type="text" formControlName="userLocation" matInput placeholder="Enter Location"  required>
+                            <mat-error *ngIf="userLocation?.invalid && (userLocation?.touched || userLocation?.dirty)">
+                                <span *ngIf="userLocation?.hasError('required')">Location is required</span>
+                            </mat-error>
+                      </mat-form-field>
+                      
+                    </div>
+
+                    <div class="login-text-right">
+                        <small><a class="text-decoration-none " [routerLink]="['']">Already have an account?</a></small>
+                    </div>
+                    
+                    <div class="text-center py-4">
+                        <button mat-raised-button color="primary" type="submit">Register</button>
+                    </div>
+                </form>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+
+  

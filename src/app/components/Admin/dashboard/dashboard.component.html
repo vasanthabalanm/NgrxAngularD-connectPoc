@@ -1,0 +1,20 @@
+<!-- admin -->
+<ng-container *ngIf="role === 'Admin'" class="admin-dashborad">
+    <div class="main-content">
+        <div>
+            <app-menubar/>
+            <router-outlet/>
+        </div>
+    </div>
+</ng-container>
+
+<!-- user -->
+<ng-container *ngIf="role === 'User'">
+    <div class="main-content">
+        <div>
+            <app-menubar/>
+            <router-outlet/>
+        </div>
+    </div>
+</ng-container>
+

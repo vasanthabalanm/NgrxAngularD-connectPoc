@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="d-flex justify-content-between py-2 px-3">
+        <div>       
+            <h1 mat-dialog-title>Branch</h1>
+        </div>
+
+        <div>
+            <button mat-icon-button (click)="onClose()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+
+    </div>
+    <h2 mat-dialog-title class="px-5">{{ updateData.title }}</h2>
+    <div mat-dialog-content class="px-5 py-2">
+        <form [formGroup]="addBranch">
+            <mat-form-field class="selection-box">
+                <mat-label>Select Hotel</mat-label>
+                <mat-select formControlName="hotelId" (change)="getAllhotel()">
+                    <div *ngIf="isEdit == true">
+                        <mat-option disabled *ngFor="let hotel of listofHotel" [value]="hotel.id">{{hotel.hotelName}}</mat-option>
+                    </div>
+                    <div *ngIf="isEdit == false">
+                        <mat-option  *ngFor="let hotel of listofHotel" [value]="hotel.id">{{hotel.hotelName}}</mat-option>
+                    </div>
+
+                </mat-select>
+                <mat-error *ngIf="hotelid?.invalid && (hotelid?.touched || hotelid?.dirty)">
+                    <span *ngIf="hotelid?.hasError('required')">Hotel is required</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="input-box-size" appearance="outline">
+              <mat-label>Branch Name</mat-label>
+              <input formControlName="branchName" type="text" matInput placeholder="Enter Branch Name" required>
+              <mat-error *ngIf="branchname?.invalid && (branchname?.touched || branchname?.dirty)">
+                  <span *ngIf="branchname?.hasError('required')">BranchName is required</span>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="input-box-size" appearance="outline">
+                <mat-label>Branch Location</mat-label>
+                <input formControlName="branchLocation" type="text" matInput placeholder="Enter Branch Location" required>
+                <mat-error *ngIf="branchlocation?.invalid && (branchlocation?.touched || branchlocation?.dirty)">
+                    <span *ngIf="branchlocation?.hasError('required')">BranchLocation is required</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="input-box-size" appearance="outline">
+                <mat-label>Branch PhoneNo</mat-label>
+                <input formControlName="branchPhoneNumber" type="text" matInput placeholder="Enter Branch ContactNo" maxlength="14" required>
+                <mat-error *ngIf="branchphonenumber?.invalid && (branchphonenumber?.touched || branchphonenumber?.dirty)">
+                    <span *ngIf="branchphonenumber?.hasError('required')">BranchContactNo is required</span>
+                    <span *ngIf="branchphonenumber?.hasError('pattern')">Please enter valid Phone</span>
+                </mat-error>
+            </mat-form-field>
+
+            <div class="d-flex float-end">
+                <div mat-dialog-actions>
+                    <button mat-button class="bg-secondary text-white" (click)="onClose()">Close</button>
+                </div>
+                <div class="py-2" *ngIf="!updateData.isedit">
+                    <button mat-button  class="bg-primary text-white" type="submit" (click)="formBranchsubmit()">Save</button>
+                </div>
+                <div class="py-2" *ngIf="updateData.isedit">
+                    <button mat-button  class="bg-primary text-white" (click)="updateBranch()">Update</button>
+                </div>
+            </div>
+            
+          </form>
+    </div>
+
+</div>

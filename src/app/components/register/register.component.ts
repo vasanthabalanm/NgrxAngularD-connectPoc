@@ -21,7 +21,7 @@ export class RegisterComponent {
 
   constructor(
     private fb:FormBuilder,
-    private store:Store<{postUserDataResponse:any}>,
+    private store:Store,
     private router:Router,
     private toast:NgToastService
   )

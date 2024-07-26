@@ -21,7 +21,7 @@ export class LoginComponent {
 
 
   constructor(private fb: FormBuilder,
-    private store: Store<{ getUserDataResponse: any }>,
+    private store: Store,
     private toast: NgToastService,
     private adminService: LoginDataService,
     private router: Router

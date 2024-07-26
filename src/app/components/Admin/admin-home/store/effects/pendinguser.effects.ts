@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { GetPendingUserTotalCount, GetTotalPendingUserCountError, GetTotalPendingUserCountSuccess } from "../actions/pendinguser.action";
-import { catchError, map, mergeMap } from "rxjs";
+import { catchError, map, mergeMap, of } from "rxjs";
 import { CommonEndpoint } from "../../../../../constant/CommonEndpoint";
 
 @Injectable()
@@ -15,7 +15,7 @@ export class PendingUserEffects {
             ofType(GetPendingUserTotalCount),
             mergeMap(()=>this.http.get(`${CommonEndpoint.adminEndpoints}/TotalPendingUser`).pipe(
                 map((data:any)=>GetTotalPendingUserCountSuccess({getCountsOfPendingUser:data})),
-                catchError(async (error:any)=>{return GetTotalPendingUserCountError({error:error})})
+                catchError((error:any)=> of(GetTotalPendingUserCountError({error:error})))
             ))
         )
     );

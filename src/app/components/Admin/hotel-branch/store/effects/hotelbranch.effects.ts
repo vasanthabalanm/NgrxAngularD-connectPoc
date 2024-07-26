@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { catchError, map, mergeMap } from "rxjs";
+import { catchError, map, mergeMap, of } from "rxjs";
 import { GetBranchData, GetBranchDataError, GetBranchDataSuccess } from "../action/hotelbranch.action";
 import { CommonEndpoint } from "../../../../../constant/CommonEndpoint";
 
@@ -15,7 +15,7 @@ export class HotelBranchEffects {
             ofType(GetBranchData),
             mergeMap(()=>this.http.get(`${CommonEndpoint.addBranch}/DisplayBranch`).pipe(
                 map((data:any)=>GetBranchDataSuccess({branchdata:data})),
-                catchError(async (error:any)=>{return GetBranchDataError({error:error})})
+                catchError((error:any)=> of(GetBranchDataError({error:error})))
             ))
         )
     )

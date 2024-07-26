@@ -16,80 +16,66 @@ import { pipe, Subscription, take } from 'rxjs';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  logindetail!:FormGroup;
+  logindetail!: FormGroup;
   private subscription!: Subscription;
 
 
-  constructor(private fb:FormBuilder,
-              private store:Store<{getUserDataResponse: any}>,
-              private toast:NgToastService,
-              private adminService:LoginDataService,
-              private router:Router
-            )
-  {
+  constructor(private fb: FormBuilder,
+    private store: Store<{ getUserDataResponse: any }>,
+    private toast: NgToastService,
+    private adminService: LoginDataService,
+    private router: Router
+  ) {
     this.logindetail = this.fb.group({
-      email:['',[Validators.required,Validators.pattern(Formvalidators.mail)]],
-      userPassword:['',[Validators.required]]
+      email: ['', [Validators.required, Validators.pattern(Formvalidators.mail)]],
+      userPassword: ['', [Validators.required]]
     })
   }
-  // ngOnDestroy() {
-  //   this.subscription.unsubscribe();
-  // }
 
-  get email(){
+  get email() {
     return this.logindetail.get('email');
   }
-  get password(){
+  get password() {
     return this.logindetail.get('userPassword');
   }
 
-  formsubmit(){
+  formsubmit() {
     console.log(this.logindetail.value)
     if (this.logindetail.valid) {
-      this.store.dispatch(GetLoginData({payload:this.logindetail.value}));
+      this.store.dispatch(GetLoginData({ payload: this.logindetail.value }));
       this.subscription = this.store.select(GetUserDataSelector)
-      .subscribe({
-        next:(data:any)=>{
-          console.log(data)
-          if(data.error == false){
-            this.adminService.setStorageValues(data.userData.id,data.userData.email,data.userData.userRole,data.userData.tempPassword);
-            this.toast.success('Login Success','SUCCESS',5000);
-            let enteredpass = this.logindetail.get('UserPassword')?.value;
-            let fetchedvalue = this.adminService.getOldPass();
-            console.log(fetchedvalue);
-            if(enteredpass === this.adminService.getOldPass()){
-              this.router.navigate(['updatePass'])
+        .subscribe({
+          next: (data: any) => {
+            console.log(data)
+            if (data.error) {
+              this.toast.danger(data.error, 'Error', 3000)
+              this.subscription.unsubscribe()
             }
-            else{
-              this.router.navigate(['admin-dashboard'])
+            else {
+              this.adminService.setStorageValues(data.userData.id, data.userData.email, data.userData.userRole, data.userData.tempPassword);
+              this.toast.success('Login Success', 'SUCCESS', 5000);
+              let enteredpass = this.logindetail.get('UserPassword')?.value;
+              let fetchedvalue = this.adminService.getOldPass();
+              console.log(fetchedvalue);
+              if (enteredpass === this.adminService.getOldPass()) {
+                this.router.navigate(['updatePass'])
+              }
+              else {
+                this.router.navigate(['admin-dashboard'])
+              }
+              this.subscription.unsubscribe();
             }
-            this.subscription.unsubscribe();
+          },
+          error: (error: any) => {
+            this.toast.danger('Unexpected error', 'Error', 3000)
+            this.subscription.unsubscribe()
           }
-          else if(data.error != true){
-            this.toast.danger('Something went wrong!','Error',5000);
-            this.subscription.unsubscribe();
-          }
-        }
-          // if(data.error == false){
-          //   this.adminService.setStorageValues(data.id,data.email,data.userRole,data.tempPassword);
-          //   this.toast.success('Login Success','SUCCESS',5000);
-          //   let enteredpass = this.logindetail.get('UserPassword')?.value;
-          //   let fetchedvalue = this.adminService.getOldPass();
-          //   console.log(fetchedvalue);
-          //   if(enteredpass === this.adminService.getOldPass()){
-          //     this.router.navigate(['updatePass'])
-          //   }
-          //   else{
-          //     this.router.navigate(['admin-dashboard'])
-          //   }
-          // }
-          // else if(data.error != true){
-          //   this.toast.danger('Something went wrong!','Error',5000);
-          // }
-      })
-      
-    }else{
+
+        })
+
+    } else {
       FormValidationCheck.ValidateallformFields(this.logindetail);
     }
   }
+
 }

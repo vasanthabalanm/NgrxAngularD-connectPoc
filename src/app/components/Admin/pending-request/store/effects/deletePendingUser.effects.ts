@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { deletePendingUser, deletePendingUserError, deletPendingUserSuccess } from "../actions/deletePendingUser.actions";
-import { catchError, map, mergeMap, switchMap } from "rxjs";
+import { catchError, map, mergeMap, of, switchMap } from "rxjs";
 import { CommonEndpoint } from "../../../../../constant/CommonEndpoint";
 
 @Injectable()
@@ -19,7 +19,7 @@ export class DeletePendingUserEffects {
                 console.log(id)
                 return this.http.delete(`${CommonEndpoint.pendingUserEndpoint}/DeletePendingUser?id=${id}`).pipe(
                     map((data:any)=> deletPendingUserSuccess({getDeleteData:data})),
-                    catchError(async (error:any)=>{return deletePendingUserError({error:error.error.text})})
+                    catchError((error:any)=>of(deletePendingUserError({error:error.error.text})))
                 )
             })
         )

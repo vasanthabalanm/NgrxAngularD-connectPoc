@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { GetTotalHotels, GetTotalHotelsError, GetTotalHotelssuccess} from "../actions/counts.action";
-import { catchError, map, mergeMap, pipe } from "rxjs";
+import { catchError, map, mergeMap, of, pipe } from "rxjs";
 import { CommonEndpoint } from "../../../../../constant/CommonEndpoint";
 
 @Injectable()
@@ -17,7 +17,7 @@ export class TotalCountsList {
             ofType(GetTotalHotels),
             mergeMap(()=>this.http.get(`${CommonEndpoint.addHotel}/TotalHotelCounts`).pipe(
                 map((data:any)=>GetTotalHotelssuccess({getCountofHotels:data})),
-                catchError(async (error:any)=>{return GetTotalHotelsError({error:error})})
+                catchError((error:any)=> of(GetTotalHotelsError({error:error})))
             ))
         )
     );

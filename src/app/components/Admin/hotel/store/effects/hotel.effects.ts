@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { GetAllHotel, GetAllHotelErrorData, GetAllHotelSuccessData, UpdateHotel, UpdateHotelErrorData, UpdateHotelSuccessData } from "../actions/hotel.actions";
 import { CommonEndpoint } from "../../../../../constant/CommonEndpoint";
-import { async, catchError, concatMap, map, mergeMap, switchMap } from "rxjs";
+import { async, catchError, concatMap, map, mergeMap, of, switchMap } from "rxjs";
 
 @Injectable()
 
@@ -16,7 +16,7 @@ export class GetAllHotelDetailEffects {
             ofType(GetAllHotel),
             mergeMap(()=>this.http.get(`${CommonEndpoint.addHotel}/ViewHotel`).pipe(
                 map((data:any)=> GetAllHotelSuccessData({getallhotelDetails:data})),
-                catchError(async (error:any)=>{return GetAllHotelErrorData({error:error.error})})
+                catchError((error:any)=>of(GetAllHotelErrorData({error:error.error})))
                 )
             )
        )

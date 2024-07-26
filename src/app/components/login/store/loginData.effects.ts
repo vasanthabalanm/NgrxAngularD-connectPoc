@@ -4,6 +4,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, switchMap } from "rxjs/operators";
 import { CommonEndpoint } from "../../../constant/CommonEndpoint";
 import { GetLoginData, GetLoginFailureData, GetLoginSuccessData } from "./loginData.action";
+import { of } from "rxjs";
 
 @Injectable()
 export class LoginDataEffects {
@@ -15,7 +16,7 @@ export class LoginDataEffects {
             switchMap((action) =>
                 this.http.post(`${CommonEndpoint.adminEndpoints}/Login`, action.payload).pipe(
                     map((data: any) => GetLoginSuccessData({ getuserdetails: data })),
-                    catchError(async (error: any) => {return GetLoginFailureData({error: error.error});})
+                    catchError((error: any) => of(GetLoginFailureData({error: error.error})))
                 )
             )
         )

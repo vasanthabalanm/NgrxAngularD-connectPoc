@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { RegisterUser, RegisterUserFailure, RegisterUserSucess } from "./registerData.action";
-import { catchError, map, switchMap } from "rxjs";
+import { catchError, map, of, switchMap } from "rxjs";
 import { CommonEndpoint } from "../../../constant/CommonEndpoint";
 
 @Injectable()
@@ -16,7 +16,7 @@ export class RegisterUserEffects{
             switchMap((action)=>
                 this.http.post(`${CommonEndpoint.pendingUserEndpoint}/AddUser`, action.payload).pipe(
                     map((data:any)=>RegisterUserSucess({getRegisteredData:data})),
-                    catchError(async(errors:any)=>{return RegisterUserFailure({error:errors});})
+                    catchError((errors:any)=> of(RegisterUserFailure({error:errors})))
                 )
             )
         )

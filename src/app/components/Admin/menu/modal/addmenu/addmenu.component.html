@@ -13,5 +13,15 @@
     </div>
     <h2 mat-dialog-title class="px-5">{{ updateData.title }}</h2>
     <div mat-dialog-content class="px-5 py-2">
+        <form [formGroup]="addmenu">
+            <mat-form-field>
+                <mat-label>Hotel Branch</mat-label>
+                <mat-select formControlName="hotelBranchId">
+                    <mat-option></mat-option>
+                </mat-select>
+
+
+            </mat-form-field>
+        </form>
     </div>
 </div>

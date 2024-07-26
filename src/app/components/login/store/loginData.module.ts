@@ -14,4 +14,4 @@ import { LoginDataEffects } from "./loginData.effects";
     ],
 })
 
-export class  LoginStoreModule {}
+export class LoginStoreModule {}

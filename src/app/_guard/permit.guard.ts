@@ -9,6 +9,9 @@ export const permitGuard: CanActivateFn = (route, state) => {
   if (adminser.isLogin()) {
     return true;
   }
+  // if (adminser.getAdmin()) {
+  //   return true;
+  // }
   else {
     router.navigate(['login']);
     return false;

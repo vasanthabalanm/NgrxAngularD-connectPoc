@@ -6,7 +6,10 @@ import { Router } from '@angular/router';
 })
 export class LoginDataService {
 
-  constructor( private router: Router) { }
+  constructor( private router: Router) { 
+    this.getRole();
+  }
+  private role!:string;
 
   setStorageValues(setId: string, setemail: string, setRole: string,setOldpass:string) {
     const encodedData = btoa(JSON.stringify({ id: setId, email: setemail, userRole: setRole,tempPassword:setOldpass }));
@@ -18,6 +21,7 @@ export class LoginDataService {
     if (encodedData) {
       const decodedData = JSON.parse(atob(encodedData));
       console.log(decodedData)
+      this.role = decodedData.userRole;
       return decodedData.userRole;
     }
     return null;
@@ -57,5 +61,12 @@ export class LoginDataService {
   logout() {
     localStorage.removeItem('userData');
     this.router.navigate(['']);
+  }
+
+  getAdmin():boolean{
+    if(this.role == 'Admin'){
+      return true
+    }
+    return false
   }
 }

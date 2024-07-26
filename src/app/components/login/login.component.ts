@@ -67,7 +67,7 @@ export class LoginComponent {
             }
           },
           error: (error: any) => {
-            this.toast.danger('Unexpected error', 'Error', 3000)
+            this.toast.danger('Something went wrong', 'Error', 3000)
             this.subscription.unsubscribe()
           }
 

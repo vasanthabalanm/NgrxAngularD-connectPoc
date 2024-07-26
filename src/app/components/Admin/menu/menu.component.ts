@@ -31,7 +31,7 @@ export class MenuComponent {
     }
     else{
       dialogref = this.matdialog.open(AddmenuComponent,{
-        width:'500px',
+        width:'800px',
         height:'550px',
         data:{action:'add',title:'Add Menu',isEdit:false}
       }).afterClosed().subscribe(()=>{

@@ -15,7 +15,7 @@ export class DashboardComponent {
     console.log(this.role)
     if (this.role === 'Admin') {
       this.router.navigate(['/admin-dashboard/admin-home']);
-      this.router.navigate(['/admin-dashboard/admin-home/user-home']);
+      // this.router.navigate(['/admin-dashboard/admin-home/user-home']);
     }
     else if (this.role === 'User') {
       this.router.navigate(['/admin-dashboard/admin-home/user-home']);

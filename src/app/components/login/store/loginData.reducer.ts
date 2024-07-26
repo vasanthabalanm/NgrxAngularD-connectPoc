@@ -11,16 +11,13 @@ export const initialState:any = {
 export const loginReducer = createReducer(
     initialState,
     on(GetLoginData, (state) => ({
-        ...state,
         error: false 
     })),
     on(GetLoginSuccessData, (state, { getuserdetails }) => ({
-        ...state,
         userData:getuserdetails,
         error: false 
     })),
     on(GetLoginFailureData, (state, { error }) => ({
-        ...state,
         error: error 
     }))
 );

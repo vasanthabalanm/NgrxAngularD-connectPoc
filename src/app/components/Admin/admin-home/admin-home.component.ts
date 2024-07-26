@@ -23,6 +23,7 @@ export class AdminHomeComponent implements OnInit {
   totalapprovedUserCounts!:number;
   userRole!:string;
   userEmail!:string;
+  index!:number;
 
   constructor(
     private store:Store,
@@ -67,7 +68,15 @@ export class AdminHomeComponent implements OnInit {
     console.log(roleFromLocalStorage);
     this.userRole = roleFromLocalStorage ;
     this.userEmail = emailFromLocalStorage;
+
+    if(this.userRole == 'Admin'){
+      this.index = 0;
+    }
+    else if (this.userRole == 'User'){
+      this.index = 1;
+    }
   }
+
 
 
 

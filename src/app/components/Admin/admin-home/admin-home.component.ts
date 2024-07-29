@@ -49,7 +49,6 @@ export class AdminHomeComponent implements OnInit {
 
     // pending user
     this.store.select(TotalPendingUserCountsSelector).subscribe((data:any)=>{
-      console.log(data)
       this.totalPendingUserCounts = data.datas
     })
 
@@ -65,7 +64,6 @@ export class AdminHomeComponent implements OnInit {
   private initializeUserData() {
     const roleFromLocalStorage = this.adminservice.getRole();
     const emailFromLocalStorage = this.adminservice.getemail();
-    console.log(roleFromLocalStorage);
     this.userRole = roleFromLocalStorage ;
     this.userEmail = emailFromLocalStorage;
 

@@ -82,10 +82,8 @@ export class HotelBranchComponent implements OnInit {
 
     this.subscriptions = this.store.select(HotelBranchSelector).subscribe(
       (data: any) => {
-        console.log(data)
         this.isLoading = data.loaded
         this.branchList = data.data
-        console.log(this.branchList)
         this.datasource = new MatTableDataSource<Branch>(this.branchList)
       }
     )
@@ -93,7 +91,6 @@ export class HotelBranchComponent implements OnInit {
 
   deleteBranch(data: any) {
     let removeData = { id: data.id, hotelId: data.hotelId }
-    console.log(removeData);
     if (confirm("Are you sure to delete Hotel Branch?")) {
       this.store.dispatch(DeleteHotebranch({ payload: removeData }));
       this.subscriptions = this.store.select(DeleteHotelBranchSelector).subscribe(

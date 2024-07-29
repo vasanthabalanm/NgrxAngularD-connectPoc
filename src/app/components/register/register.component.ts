@@ -70,14 +70,11 @@ export class RegisterComponent {
 
 
   formsubmit(){
-    console.log(this.registerDetail.value)
     if (this.registerDetail.valid) {
-      console.log(this.registerDetail.value);
       this.store.dispatch(RegisterUser({payload:this.registerDetail.value}));
       this.subscription = this.store.select(RegisterDataSelector).subscribe(
         {
           next:(data:any)=>{
-            console.log(data)
             if(data.error == false){
               this.registerDetail.reset();
               this.toast.success('Please Wait For Admin Approval','Success',5000);

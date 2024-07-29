@@ -52,14 +52,12 @@ export class AddbranchComponent {
 
   onClose(): void {
     this.dialogRef.close();
-    console.log()
   }
 
   ngOnInit() {
     this.initializeUserId();
     this.getAllhotel();
     this.setFormValues(this.updateData)
-    console.log(this.updateData)
   }
 
   get hotelid() {
@@ -102,13 +100,11 @@ export class AddbranchComponent {
 
   // save logic
   formBranchsubmit() {
-    console.log(this.addBranch.value)
     let branchdata = {...this.addBranch.value,}
 
     if (this.addBranch.valid) {
       this.store.dispatch(PostNewBranch({ payload: branchdata }));
       this.subscription = this.store.select(AddBranchSelector).subscribe((data: any) => {
-        console.log(data)
         if (data.error == true) {
           this.onClose();
           this.toast.success('Branch Added', 'Success', 3000);
@@ -125,7 +121,6 @@ export class AddbranchComponent {
   // update logic
   updateBranch() {
     let updateData = {...this.addBranch.value,id:this.hotelBranchIds}
-    console.log(updateData)
     if (this.addBranch.valid) {
       this.store.dispatch(UpdateBranchData({ payload: updateData }));
       this.subscription = this.store.select(UpdateHotelBranchSelector).subscribe({

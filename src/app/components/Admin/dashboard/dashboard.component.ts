@@ -12,20 +12,18 @@ export class DashboardComponent {
   constructor(private adminser: LoginDataService, private router: Router) { }
   ngOnInit() {
     this.initializeUserData();
-    console.log(this.role)
     if (this.role === 'Admin') {
       this.router.navigate(['/admin-dashboard/admin-home']);
       // this.router.navigate(['/admin-dashboard/admin-home/user-home']);
     }
     else if (this.role === 'User') {
-      this.router.navigate(['/admin-dashboard/admin-home/user-home']);
+      this.router.navigate(['user-home']);
     }
   }
 
   //fetch the details from the localstorage
   private initializeUserData() {
     const roleFromLocalStorage = this.adminser.getRole();
-    console.log(roleFromLocalStorage);
     this.role = roleFromLocalStorage ;
   }
 }

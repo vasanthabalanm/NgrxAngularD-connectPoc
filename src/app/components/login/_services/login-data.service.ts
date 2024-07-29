@@ -20,7 +20,6 @@ export class LoginDataService {
     const encodedData = localStorage.getItem('userData');
     if (encodedData) {
       const decodedData = JSON.parse(atob(encodedData));
-      console.log(decodedData)
       this.role = decodedData.userRole;
       return decodedData.userRole;
     }
@@ -49,6 +48,19 @@ export class LoginDataService {
     return !!localStorage.getItem('userData');
   }
 
+  getAdmin():boolean{
+    const encodedData = localStorage.getItem('userData');
+    if (encodedData) {
+      const decodedData = JSON.parse(atob(encodedData));
+      let role = decodedData.userRole;
+      if(role == 'Admin'){
+        return true
+      }
+      return false;
+    }
+    
+    return false;
+  }
   getemail() {
     const encodedData = localStorage.getItem('userData');
     if (encodedData) {
@@ -63,10 +75,19 @@ export class LoginDataService {
     this.router.navigate(['']);
   }
 
-  getAdmin():boolean{
-    if(this.role == 'Admin'){
-      return true
+ 
+
+  getUser():boolean{
+    const encodedData = localStorage.getItem('userData');
+    if (encodedData) {
+      const decodedData = JSON.parse(atob(encodedData));
+      let role = decodedData.userRole;
+      if(role == 'User'){
+        return true
+      }
+      return false;
     }
-    return false
+    
+    return false;
   }
 }

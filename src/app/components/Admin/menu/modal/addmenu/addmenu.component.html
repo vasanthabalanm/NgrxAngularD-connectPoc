@@ -14,14 +14,30 @@
     <h2 mat-dialog-title class="px-5">{{ updateData.title }}</h2>
     <div mat-dialog-content class="px-5 py-2">
         <form [formGroup]="addmenu">
-            <mat-form-field>
+
+            <mat-form-field class="selection-box">
                 <mat-label>Hotel Branch</mat-label>
-                <mat-select formControlName="hotelBranchId">
-                    <mat-option></mat-option>
+                <mat-select formControlName="hotelBranchId" (change)="getAllBranch()">
+                    <!-- <div *ngIf="isEdit == true">
+                        <mat-option disabled *ngFor="let branch of branchList" [value]="branch.id">{{branch.branchName}}</mat-option>
+                    </div> -->
+                    <!-- <div *ngIf="isEdit == false">
+                        <mat-option  *ngFor="let branch of branchList" [value]="branch.id">{{branch.branchName}}</mat-option>
+                    </div> -->
+                    <mat-option  *ngFor="let branch of branchList" [value]="branch.id">{{branch.branchName}}</mat-option>
+
+
                 </mat-select>
-
-
+                <mat-error *ngIf="hotelbranchId?.invalid && (hotelbranchId?.touched || hotelbranchId?.dirty)">
+                    <span *ngIf="hotelbranchId?.hasError('required')">Hotel is required</span>
+                </mat-error>
             </mat-form-field>
+
+            <div class="float-end">
+                <button mat-button class="bg-primary text-white" (click)="addMenuDatas()" [disabled]="addmenu.get('menuDetails')?.invalid">
+                    Add Menu
+                  </button>
+            </div>
         </form>
     </div>
 </div>

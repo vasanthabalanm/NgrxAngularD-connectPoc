@@ -34,6 +34,7 @@ import { PostHotelBranchStoreModule } from './components/Admin/hotel-branch/mode
 import { GetPendingUserStoreModule } from './components/Admin/pending-request/store/getPendingUserData.module';
 import { DeleteApprovedStoreModule } from './components/Admin/approved-request/store/deleteApprovedUserStore.module';
 import { AddmenuComponent } from './components/Admin/menu/modal/addmenu/addmenu.component';
+import { PendingOrderStoreModule } from './components/Admin/pending-order/store/pendingorder.module';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,7 @@ import { AddmenuComponent } from './components/Admin/menu/modal/addmenu/addmenu.
     NgToastModule,
     HttpClientModule,
     StoreModule.forRoot({}),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: isDevMode() }),
+    StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot({}),
     LoginStoreModule,
     RegisterUserStoreModule,
@@ -72,7 +73,7 @@ import { AddmenuComponent } from './components/Admin/menu/modal/addmenu/addmenu.
     PostHotelBranchStoreModule,
     GetPendingUserStoreModule,
     DeleteApprovedStoreModule,
-    
+    PendingOrderStoreModule,
   
 
   ],

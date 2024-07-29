@@ -35,7 +35,6 @@ export class ApprovedRequestComponent {
     this.store.select(ApprovedUserSelector).subscribe((data:any)=>{
       this.approvedUserList = data.responseData
       this.loading  = data.loaded
-      console.log(this.approvedUserList)
       this.dataSource = new MatTableDataSource<ApprovedUserData>(this.approvedUserList)
     })
   }
@@ -70,12 +69,10 @@ export class ApprovedRequestComponent {
   // }
 
   decline(id:number){
-    console.log(id)
     if(confirm("Are you sure to delete?")){
       this.store.dispatch(deleteapproveUser({payload:id}))
       this.subscriptions = this.store.select(DeleteApprovedUserSelector).subscribe({
         next:(data:any)=>{
-          console.log(data)
           if(data.loading != true){
             if(data.responsedata.message == 'ApprovedUser has been deleted'){
               this.toast.success('Deleted','Success',3000);

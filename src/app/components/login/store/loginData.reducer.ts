@@ -5,13 +5,13 @@ import { GetLoginData, GetLoginFailureData, GetLoginSuccessData } from "./loginD
 
 export const initialState:any = {
     userData:null,
-    error: false
+    error: null
 };
 
 export const loginReducer = createReducer(
     initialState,
     on(GetLoginData, (state) => ({
-        error: false 
+        error: null 
     })),
     on(GetLoginSuccessData, (state, { getuserdetails }) => ({
         userData:getuserdetails,

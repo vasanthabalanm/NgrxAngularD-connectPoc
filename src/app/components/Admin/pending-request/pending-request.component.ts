@@ -36,7 +36,6 @@ export class PendingRequestComponent implements OnInit {
 
   GetPendigData(){
     this.store.select(GetPendingUserDataSelector).subscribe((data:any)=>{
-      console.log(data)
       this.pendingUserList = data.responseData
       this.loading  = data.loader
       this.dataSource = new MatTableDataSource<PendingUser>(this.pendingUserList)
@@ -53,9 +52,7 @@ export class PendingRequestComponent implements OnInit {
     this.store.dispatch(postNewUser({payload:newUser}))
     this.subscriptions = this.store.select(PostNewUserSelector).subscribe(
       (data:any)=>{
-        console.log(data)
         if(data.loader != true){
-          console.log(this.pendingId)
           this.toast.success('User Approved','Success',3000);
           this.approveReject(this.pendingId)
           this.store.dispatch(GetPendingUserTotalCount());
@@ -71,11 +68,9 @@ export class PendingRequestComponent implements OnInit {
 
   // decline logic
   decline(id:number){
-    console.log(id)
     if(confirm("Are you sure to delete?")){
       this.store.dispatch(deletePendingUser({payload:id}))
       this.subscriptions = this.store.select(DeletePendingUserSelector).subscribe((data:any)=>{
-        console.log(data)
           if(data.loading != true){
             if(data.responseData.message == 'PendingUser has been deleted'){
               this.toast.success('Deleted','Success',3000);
@@ -97,7 +92,6 @@ export class PendingRequestComponent implements OnInit {
 
   // decline logic
   approveReject(id:number){
-    console.log(id)
     this.store.dispatch(deletePendingUser({payload:id}))
     this.store.select(DeletePendingUserSelector).subscribe((data:any)=>{
       if(data.loading != true){

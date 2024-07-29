@@ -13,7 +13,7 @@ export class LoginDataEffects {
     GetLoginData$ = createEffect(() =>
         this.action$.pipe(
             ofType(GetLoginData),
-            mergeMap((action) =>
+            switchMap((action) =>
                 this.http.post(`${CommonEndpoint.adminEndpoints}/Login`, action.payload).pipe(
                     map((data: any) => GetLoginSuccessData({ getuserdetails: data })),
                     catchError((error: any) => of(GetLoginFailureData({error: error.error})))

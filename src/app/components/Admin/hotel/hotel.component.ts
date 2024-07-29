@@ -67,10 +67,8 @@ export class HotelComponent implements OnInit {
 
     this.subscriptions = this.store.select(GetAllHotelSelector).subscribe(
       (data:any)=>{
-        console.log(data)
         this.isLoading = data.loaded
         this.hotelsList = data.datas
-        console.log(this.hotelsList)
         this.datasource = new MatTableDataSource<Hotel>(this.hotelsList)
       }
     )
@@ -83,7 +81,6 @@ export class HotelComponent implements OnInit {
       this.store.dispatch(DeleteHotel({payload:deleteData}));
       this.subscriptions = this.store.select(HotelDeleteSelector).subscribe({
         next:(data:any)=>{
-          console.log(data)
           if(data.error == true){
             // this.toast.success('Hotel deleted', 'Success', 3000);
             this.store.dispatch(GetAllHotel())

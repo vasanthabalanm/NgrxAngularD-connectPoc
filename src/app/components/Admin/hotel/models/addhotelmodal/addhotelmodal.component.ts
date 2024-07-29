@@ -54,17 +54,14 @@ export class AddhotelmodalComponent {
 
   // add logic
   formHotelsubmit() {
-    console.log(this.Addhotel.value);
     let addhotl = { ...this.Addhotel.value, approvedUsersId: this.id }
     if (this.Addhotel.valid) {
       this.store.dispatch(PostHotel({ payload: addhotl }))
       this.subscription = this.store.select(AddHotelSelector).subscribe(
         {
           next: (data: any) => {
-            console.log(data)
             if (data.error == false) {
               this.onClose();
-              console.log('inserted');
               this.store.dispatch(GetAllHotel())
               this.store.dispatch(GetTotalHotels())
               this.toast.success('Hotel Added', 'Success', 3000);
@@ -106,15 +103,12 @@ export class AddhotelmodalComponent {
 
   // update logic
   updateHotel(){
-    console.log(this.Addhotel.value);
     let updthotl = { ...this.Addhotel.value, approvedUsersId: this.id,id:this.hotelIds}
-    console.log(updthotl)
     if (this.Addhotel.valid) {
       this.store.dispatch(UpdateHotel({ payload: updthotl }))
       this.subscription = this.store.select(AddHotelSelector).subscribe(
         {
           next: (data: any) => {
-            console.log(data)
             if (data.error == false) {
               this.onClose()
               this.toast.success('Hotel Updated', 'Success', 3000);

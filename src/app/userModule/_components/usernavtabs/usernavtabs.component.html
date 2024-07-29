@@ -1,0 +1,42 @@
+<div class="container">
+    <h3 class="py-5">Hotel Management Data</h3>
+    <div class="d-flex justify-content-between">
+        <div><p>welcome:<strong>{{userEmail}}</strong></p></div>
+        <div><p>Role:<strong>{{userRole}}</strong></p></div>
+    </div>
+    
+    
+    <div class="container" >
+        <mat-tab-group animationDuration="0ms" >
+            <!-- HotelBranch -->
+            <mat-tab>
+                <ng-template mat-tab-label>User
+                    <span class="mat-badge-content">2</span>
+                </ng-template>
+                <div *ngIf="userRole =='User'">
+                    <div class="py-5">
+                        <mat-tab-group animationDuration="0ms">
+                          <mat-tab label="Menu">
+                            <app-order-menu/>
+                          </mat-tab>
+                      
+                          <mat-tab label="Orders">
+                            <app-order-details/>
+                          </mat-tab>
+                        </mat-tab-group>
+                      </div>
+                      
+                </div>
+                
+                <div *ngIf="userRole =='Admin'">
+                    <div class="container content">
+                        <p class="text-center">Please Login as a <strong>User</strong> to Order!!</p>
+                    </div>
+                </div>
+            </mat-tab>
+
+        </mat-tab-group>
+    </div>
+    
+
+</div>

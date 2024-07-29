@@ -35,6 +35,8 @@ import { GetPendingUserStoreModule } from './components/Admin/pending-request/st
 import { DeleteApprovedStoreModule } from './components/Admin/approved-request/store/deleteApprovedUserStore.module';
 import { AddmenuComponent } from './components/Admin/menu/modal/addmenu/addmenu.component';
 import { PendingOrderStoreModule } from './components/Admin/pending-order/store/pendingorder.module';
+import { GetUserOrderDataStoreModule } from './userModule/_components/order-details/store/getuserOrderData.module';
+import { GetMenuDetailsStoreModule } from './userModule/_components/order-menu/store/getmenuDetails.module';
 
 @NgModule({
   declarations: [
@@ -74,6 +76,9 @@ import { PendingOrderStoreModule } from './components/Admin/pending-order/store/
     GetPendingUserStoreModule,
     DeleteApprovedStoreModule,
     PendingOrderStoreModule,
+    GetUserOrderDataStoreModule,
+    GetMenuDetailsStoreModule
+    
   
 
   ],

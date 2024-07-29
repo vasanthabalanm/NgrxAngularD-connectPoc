@@ -1,1 +1,17 @@
-<p>order-menu works!</p>
+<div class="container">
+    <div class="menu-items">
+        <mat-card class="example-card" appearance="outlined" *ngFor="let menu of menuItems;let i=index">
+            <mat-card-header>
+              <mat-card-title-group>
+                <img mat-card-xl-image src="../../../../assets/images/foodvariety/{{i+1}}.jpg" >
+              </mat-card-title-group>
+            </mat-card-header>
+            <mat-card-content>
+                <!-- content -->
+              </mat-card-content>
+            <mat-card-actions>
+                <button mat-button>Add Cart</button>
+              </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

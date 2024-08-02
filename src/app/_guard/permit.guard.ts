@@ -12,6 +12,7 @@ export const permitGuard: CanActivateFn = (route, state) => {
 
    // understanding purpose
   //  const url: string = state.url;
+  //  console.log(route)
   //  console.log('Attempting to activate:', url);
   //  console.log('Route parameters:', route.params);
   //  console.log('Query parameters:', route.queryParams);

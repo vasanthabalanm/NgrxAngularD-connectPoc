@@ -8,6 +8,8 @@ import { MaterialModule } from '../MaterialUI/material.module';
 import { UsernavtabsComponent } from './_components/usernavtabs/usernavtabs.component';
 import { UserdashboardComponent } from './_components/userdashboard/userdashboard.component';
 import { UsermenubarComponent } from './_components/usermenubar/usermenubar.component';
+import { AddcartcountsComponent } from './_components/order-menu/modal/addcartcounts/addcartcounts.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -18,12 +20,14 @@ import { UsermenubarComponent } from './_components/usermenubar/usermenubar.comp
     OrderDetailsComponent,
     UsernavtabsComponent,
     UserdashboardComponent,
-    UsermenubarComponent
+    UsermenubarComponent,
+    AddcartcountsComponent
   ],
   imports: [
     CommonModule,
     UserRoutingModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class UserModule { }

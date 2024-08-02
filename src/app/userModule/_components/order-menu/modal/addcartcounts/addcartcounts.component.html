@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="d-flex justify-content-between py-2 px-3">
+        <div>       
+            <h1 mat-dialog-title>Add Quantity</h1>
+        </div>
+
+        <div>
+            <button mat-icon-button (click)="onClose()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div>
+        <form [formGroup]="AddOrder" >
+            <div class="py-4 px-5 d-flex justify-content-center">
+                <div class="px-2 py-2">
+                    <button mat-button class="bg-primary text-white " (click)="decrementOrderCount()">-</button>
+                </div>
+                
+                <mat-form-field class="input-count-box">
+                    <mat-label>Count</mat-label>
+                    <input matInput [value]="orderCount"  formControlName="quantityOfOrder" readonly required/>
+                </mat-form-field>
+                
+                <div class="px-2 py-2">
+                    <button mat-button class="bg-primary text-white px-2" (click)="incrementOrderCount()">+</button>
+                </div>
+                
+            </div> 
+            <div class="px-4">
+                <button mat-button type="submit" class="bg-primary text-white float-end" (click)="formOrdersubmit()">Add Item</button>
+            </div>                                                   
+        </form>
+    </div>
+</div>

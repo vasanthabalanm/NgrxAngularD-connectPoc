@@ -50,6 +50,6 @@ export class MenuComponent {
 
   // decline logic
   remove(data:any){
-    console.log(data)
+    // console.log(data)
   }
 }

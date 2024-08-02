@@ -41,7 +41,6 @@ export class OrderDetailsComponent implements OnInit {
     this.store.select(GetPendingUserOrderSelector).subscribe(
       (data:any)=>{
         if(data.error){
-          console.log(data)
         }
         else{
           this.pendinOrderList = data.responseOrderData
@@ -56,7 +55,6 @@ export class OrderDetailsComponent implements OnInit {
     this.store.select(GetApprovedUserOrderSelector).subscribe(
       (data:any)=>{
         if(data.error){
-          console.log(data)
         }
         else{
           this.approvedOrderList = data.responseData
